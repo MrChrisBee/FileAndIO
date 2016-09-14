@@ -1,9 +1,5 @@
 package de.cokuss.chrisbee.fileandio;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,22 +7,19 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
     File appDir;
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        appDir = new File(getApplicationInfo().dataDir);
+        appDir = getFilesDir();
         System.out.println("Paht: " + appDir.getAbsolutePath());
         System.out.println("Write: " + appDir.canWrite());
 
@@ -50,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             bw.write("Erste Zeile");
             bw.newLine();
             bw.write("Zweite Zeile");
+            bw.newLine();
             bw.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage().toString());
@@ -66,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             System.out.println(e.getMessage().toString());
         }
-
+        //temporäre Datei erstellen !!
+        try {
+            File tmpFile = File.createTempFile("Dateiname",".extension",getCacheDir());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void dir() {
@@ -78,7 +77,4 @@ public class MainActivity extends AppCompatActivity {
         }
         System.out.println("''''''''''''''''''''''''''''''''''''''");
     }
-
-
 }
-
