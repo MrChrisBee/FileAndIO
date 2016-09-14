@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         dir();
         File toWrite = new File(appDir + "/demo.txt");
         System.out.println(toWrite.length());
-        try(FileOutputStream fos = new FileOutputStream(toWrite);
+        try(FileOutputStream fos = new FileOutputStream(toWrite,true);
              OutputStreamWriter ow = new OutputStreamWriter(fos);
              BufferedWriter bw = new BufferedWriter(ow))
         {
