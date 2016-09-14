@@ -44,29 +44,28 @@ public class MainActivity extends AppCompatActivity {
         dir();
         File toWrite = new File(appDir + "/demo.txt");
         System.out.println(toWrite.length());
-        try(FileOutputStream fos = new FileOutputStream(toWrite,true);
+        try (FileOutputStream fos = new FileOutputStream(toWrite, true);
              OutputStreamWriter ow = new OutputStreamWriter(fos);
-             BufferedWriter bw = new BufferedWriter(ow))
-        {
+             BufferedWriter bw = new BufferedWriter(ow)) {
             bw.write("Erste Zeile");
             bw.newLine();
             bw.write("Zweite Zeile");
             bw.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage().toString());
         }
         System.out.println(toWrite.length());
-        
-        try(FileInputStream fis = new FileInputStream(toWrite);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr)) {
+
+        try (FileInputStream fis = new FileInputStream(toWrite);
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             String str;
             while ((str = br.readLine()) != null) {
-             System.out.println(str);
-         }
+                System.out.println(str);
+            }
         } catch (IOException e) {
-        e.printStackTrace();
-    }
+            System.out.println(e.getMessage().toString());
+        }
 
     }
 
