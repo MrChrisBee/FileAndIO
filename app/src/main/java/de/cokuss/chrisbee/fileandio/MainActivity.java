@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         } else System.out.println("File already exists! ");
 
         dir();
+
     }
 
     private void dir() {
